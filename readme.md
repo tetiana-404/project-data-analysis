@@ -20,6 +20,85 @@ This project involves loading, cleaning, vizualizing and analyzing product data 
 - Records: 397
 - Contains multilingual product descriptions, cost/pricing, dates, and category details
 
+## 🧱 Dataset Structure
+
+| Column Name                   | Type        | Description                                 |
+| ----------------------------- | ----------- | ------------------------------------------- |
+| ProductAlternateKey           | Object      | Alternative product identifier              |
+| WeightUnitMeasureCode         | Categorical | Unit of measurement for weight              |
+| SizeUnitMeasureCode           | Categorical | Unit of measurement for size                |
+| EnglishProductName            | Object      | Product name in English                     |
+| SpanishProductName            | Object      | Product name in Spanish                     |
+| FrenchProductName             | Object      | Product name in French                      |
+| StandardCost                  | Float       | Cost to manufacture                         |
+| FinishedGoodsFlag             | Boolean     | Indicates if product is finished            |
+| Color                         | Categorical | Product color                               |
+| SafetyStockLevel              | Int         | Minimum stock level before restocking       |
+| ReorderPoint                  | Int         | Stock level that triggers reorder           |
+| ListPrice                     | Float       | Product retail price                        |
+| Size                          | Object      | Product size description                    |
+| SizeRange                     | Object      | Range of available sizes                    |
+| Weight                        | Float       | Product weight                              |
+| DaysToManufacture             | Int         | Number of days to manufacture               |
+| ProductLine                   | Categorical | Product line or category                    |
+| DealerPrice                   | Float       | Wholesale price                             |
+| Class                         | Categorical | Product classification                      |
+| Style                         | Categorical | Product style                               |
+| ModelName                     | Object      | Name of the product model                   |
+| EnglishDescription            | Object      | Description in English                      |
+| FrenchDescription             | Object      | Description in French                       |
+| ChineseDescription            | Object      | Description in Chinese                      |
+| ArabicDescription             | Object      | Description in Arabic                       |
+| HebrewDescription             | Object      | Description in Hebrew                       |
+| ThaiDescription               | Object      | Description in Thai                         |
+| GermanDescription             | Object      | Description in German                       |
+| JapaneseDescription           | Object      | Description in Japanese                     |
+| TurkishDescription            | Object      | Description in Turkish                      |
+| StartDate                     | Datetime    | Date when product became available          |
+| EndDate                       | Datetime    | Date when product was discontinued (if any) |
+| Status                        | Categorical | Product status (e.g., Active, Discontinued) |
+| EnglishProductSubcategoryName | Object      | Subcategory name in English                 |
+| SpanishProductSubcategoryName | Object      | Subcategory name in Spanish                 |
+| FrenchProductSubcategoryName  | Object      | Subcategory name in French                  |
+
+---
+
+## 🧼 Data Cleaning Process
+
+- 🧹 Dropped 6 fully empty columns
+- 🔄 Replaced comma decimal separators and converted to float
+-  Convert to datetime data types
+-  Convert to category data types
+- ❓ Filled missing **categorical** data 
+- 🧮 Filled missing **numeric** data with column **medians**
+
+---
+
+## 📈 Exploratory Data Analysis (EDA)
+- Generated descriptive statistics for numeric fields
+- Created correlation heatmap to assess variable relationships
+- Plotted histograms of:
+  - Product `StandardCost`?????????????????????
+  - `ListPrice` and `DealerPrice`??????????????????????
+  - `Weight` and `DaysToManufacture`???????????????????
+
+---
+
+## 💡 Key Insights
+
+- Significant gaps in weight data may affect shipping analytics
+- Product pricing structures are consistent within subcategories
+
+---
+
+## ✅ Recommendations
+
+- Ensure weight data is consistently entered for logistics
+- Consider reviewing duplicate SKU imports during data entry
+- Investigate outliers in pricing for premium products
+
+---
+ 
 ## 📂 Folder Structure
 
 - `data/`: Raw dataset
@@ -28,30 +107,20 @@ This project involves loading, cleaning, vizualizing and analyzing product data 
 - `presentation/`: PDF export of the final report
 - `requirements.txt`: Python dependencies
 
-## ▶️ How to Run
+---
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/<your-username>/product-data-analysis.git
-    cd product-data-analysis
-    ```
+## ⚠️ Limitations
 
-2. Create a virtual environment and install dependencies:
-    ```bash
-    python -m venv env
-    source env/bin/activate      # On Windows: env\Scripts\activate
-    pip install -r requirements.txt
-    ```
+- No unique product IDs — duplicates were inferred
+- Some missing values in key columns may skew analysis
+- Currency for prices not specified — assume consistent
 
-3. Launch the notebook:
-    ```bash
-    jupyter notebook notebooks/product_analysis.ipynb
-    ```
+---
 
 ## 📊 Tools & Libraries
 
 - Python
-- pandas
-- numpy
-- matplotlib / seaborn
+- Pandas
+- Matplotlib
+- Seaborn
 - Jupyter Notebook
